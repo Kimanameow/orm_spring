@@ -13,8 +13,12 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
+   private final SessionFactory sessionFactory;
+
    @Autowired
-   private SessionFactory sessionFactory;
+   public UserDaoImp(SessionFactory sessionFactory) {
+      this.sessionFactory = sessionFactory;
+   }
 
    @Override
    public void add(User user, Car car) {
@@ -31,7 +35,6 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   @Transactional
    public User getUserByCar(String model, int series) {
       String hql = "FROM User u WHERE u.car.model = :model AND u.car.series = :series ";
       return sessionFactory.getCurrentSession().createQuery(hql, User.class)

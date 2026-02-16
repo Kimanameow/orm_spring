@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Table(name = "cars")
 @Getter
 @Setter
-@RequiredArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +18,9 @@ public class Car {
     private String model;
     @Column(name = "series")
     private int series;
-    @OneToOne(mappedBy = "car")
-    private User user;
+
+    public Car() {
+    }
 
     public Car(String model, int series) {
         this.model = model;
